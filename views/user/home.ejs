@@ -11,8 +11,13 @@
   <h3>Selamat datang, <%= data.name %></h3>
   <h4>Saldo: <%= convertToRupiah(data.saldo) %></h4>
   <h4>Nomer Hp: <%= data.phone_number %></h4>
+
+  <a href="/users/transaction">Beli Voucher</a>
+  <a href="/users/edit">Edit Data</a>
+
   <a href="/users/transaction/<%= data.id %>">Beli Voucher</a>
   <a href="/users/edit/<%= data.id %>">Edit Data</a>
+
   <table border="1px">
     <tr>
       <th>Voucher</th>

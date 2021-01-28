@@ -2,7 +2,7 @@
   "name": "buat_pair",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +23,13 @@
   "devDependencies": {
     "nodemon": "^2.0.7",
     "sequelize-cli": "^6.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hansyahridho07/voucher_pulsa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hansyahridho07/voucher_pulsa/issues"
+  },
+  "homepage": "https://github.com/hansyahridho07/voucher_pulsa#readme"
 }
