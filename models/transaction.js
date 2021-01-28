@@ -14,9 +14,36 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Transaction.init({
-    UserId: DataTypes.INTEGER,
-    VoucherId: DataTypes.INTEGER,
-    qty: DataTypes.INTEGER
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'user id tidak boleh kosong'
+        }
+      }
+    },
+    VoucherId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'voucher id tidak boleh kosong'
+        }
+      }
+    },
+    qty: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+        notNull: {
+          msg: 'qty tidak boleh kosong'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Transaction',
