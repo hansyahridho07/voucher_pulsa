@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+</head>
+<body>
+  <h1 style="text-align: center;">e-Konter Helsinki-08</h1>
+  <%- include('../navbar/navbar.ejs') %>
+  <h3>Selamat datang, <%= data.name %></h3>
+  <h4>Saldo: <%= convertToRupiah(data.saldo) %></h4>
+  <h4>Nomer Hp: <%= data.phone_number %></h4>
+
+  <a href="/users/transaction">Beli Voucher</a>
+  <a href="/users/edit">Edit Data</a>
+
+  <a href="/users/transaction/<%= data.id %>">Beli Voucher</a>
+  <a href="/users/edit/<%= data.id %>">Edit Data</a>
+
+  <table border="1px">
+    <tr>
+      <th>Voucher</th>
+      <th>Jumlah</th>
+    </tr>
+    <% for(let i = 0; i < data.Vouchers.length; i++){ %>
+    <tr>
+      <td><%= data.Vouchers[i].name_voucher %></td>
+      <td><%= data.Vouchers[i].Transaction.qty %></td>
+    </tr>
+    <% } %>
+  </table>
+</body>
+</html>

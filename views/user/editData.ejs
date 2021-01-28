@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Data Form</title>
+</head>
+<body>
+  <h2>Edit Data Form</h2>
+  <form action="/users/edit" method="POST">
+    <label for="name">Name</label><br>
+    <input type="text" name="name" value="<%= data.name %>"><br>
+    <hr>
+    <label for="phone_number">Phone Number</label><br>
+    <input type="number" name="phone_number" value="<%= data.phone_number %>"><br>
+    <hr>
+    <label for="username">Username</label><br>
+    <input type="text" name="username" value="<%= data.username %>"><br>
+    <hr>
+    <label for="password">Password</label><br>
+    <input type="text" name="password" value="<%= data.password %>"><br>
+    <hr>
+    <label for="email">Email</label><br>
+    <input type="text" name="email" value="<%= data.email %>"><br>
+    <hr>
+    <button type="submit">Update</button>
+    <button type="button"><a href="/users/edit">Cancel</a></button>
+  </form>
+</body>
+</html>
