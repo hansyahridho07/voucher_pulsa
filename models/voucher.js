@@ -20,8 +20,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Voucher.init({
-    name_voucher: DataTypes.STRING,
-    price: DataTypes.INTEGER
+    name_voucher: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'nama voucher tidak boleh kosong'
+        }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'price tidak boleh kosong'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Voucher',
