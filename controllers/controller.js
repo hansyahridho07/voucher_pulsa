@@ -1,5 +1,6 @@
-const {User} = require('../models/index')
+const {User, Voucher} = require('../models')
 const {hash, compare} = require('../helpers/bycript')
+const convertToRupiah = require('../helpers/convertRupiah')
 class Controller{
   static showHome(req,res){
     res.render('index.ejs', {data: req.session.user})
@@ -11,6 +12,26 @@ class Controller{
 
   static getLogin(req,res){//Get login
     res.render('login.ejs')
+  }
+
+  // static getVoucher(req,res){
+  //   Voucher.findAll()
+  //     .then(data => {
+  //       res.redirect('/voucher/voucher.ejs', {data})
+  //     })
+  //     .catch(err => {
+  //       red.send(err)
+  //     })
+    
+  // }
+  static getVoucher(req,res){
+    Voucher.findAll()
+      .then(data => {
+        res.render('voucher/voucher.ejs', {data, convertToRupiah})
+      })
+      .catch(err => {
+        res.send(err)
+      })
   }
 
   static postLogin(req,res){ //Post login
@@ -25,6 +46,7 @@ class Controller{
             email: data.email,
             saldo: data.saldo
           }
+          // res.send(data)
           res.redirect('/users')
         }
       })
