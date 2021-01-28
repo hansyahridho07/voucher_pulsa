@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+</head>
+<body>
+  <h1 style="text-align: center;">Selamat Datang di e-Konter Helsinki-08</h1>
+  <table style="width: 100%;">
+    <tr>
+      <th><h3>Sudah punya akun?</h3></th>
+      <th><h3>Belum punya akun?</h3></th>
+      <th><h3>List Voucher</h3></th>
+      <% if(data){ %> 
+        <th><h3>Data Diri</h3></th> 
+      <% } %>
+    </tr>
+    <tr style="text-align: center;">
+      <td><a href="/register">Register</a></td>
+      <td><a href="/login">Login</a></td>
+      <td><a href="/vouchers">List Voucher</a></td>
+      <% if(data){ %>
+        <td><a href="/users">User</a></td>
+      <% } %>
+    </tr>
+  </table>
+</body>
+</html>
