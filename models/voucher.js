@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         through: models.Transaction
       })
     }
+    rupiah(){
+      return `Rp. ${this.name_voucher}`
+    }
   };
   Voucher.init({
     name_voucher: DataTypes.STRING,

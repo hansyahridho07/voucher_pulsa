@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List Voucher</title>
+</head>
+<body>
+  <h1 style="text-align: center;">List Voucher</h1>
+  <a href="/" style="margin-left: 40%;">Back Home</a>
+  <table style="margin-left: 40%;" border="1px">
+    <tr>
+      <th>No.</th>
+      <th>Voucher</th>
+      <th>Price</th>
+    </tr>
+    <% for(let i = 0; i < data.length; i++){ %>
+    <tr>
+      <td><%= i+1 %></td>
+      <td><%= data[i].rupiah() %></td>
+      <td><%= convertToRupiah(data[i].price) %></td>
+    </tr>
+    <% } %>
+  </table>
+</body>
+</html>
