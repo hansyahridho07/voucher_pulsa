@@ -26,7 +26,11 @@ class UserController{
         res.render('user/transaction', {data, session:req.session.user, user})
       })
       .catch(err => {
-        res.send(err)
+        let errors = []
+        for(let i = 0; i < err.errors.length; i++){
+          errors.push(err.errors[i].message)
+        }
+        res.send(errors)
       })
   }
 
@@ -42,20 +46,33 @@ class UserController{
 
   static postEdit(req,res){
     const {name, phone_number, email, username} = req.body
-    const query = {name, phone_number, email, username}
+    const query = {
+      name: name == '' ? null : name, 
+      phone_number: phone_number == '' ? null : phone_number, 
+      email: email == '' ? null : email, 
+      username: username == '' ? null : username
+    }
     User.update(query, {where: {id: req.params.id}})
       .then(data => {
         res.redirect('/users')
       })
       .catch(err => {
-        res.send(err)
+        let errors = []
+        for(let i = 0; i < err.errors.length; i++){
+          errors.push(err.errors[i].message)
+        }
+        res.send(errors)
       })
   }
 
   static postTransaction(req,res){
     const {VoucherId, qty} = req.body
     const id = req.params.id
-    const query = {VoucherId, UserId: id, qty}
+    const query = {
+      VoucherId: VoucherId == '' ? null : VoucherId, 
+      UserId: id, 
+      qty: qty == '' ? null : qty
+    }
     let harga = 0
     Transaction.create(query)
       .then(data => {
@@ -84,7 +101,11 @@ class UserController{
         res.redirect('/users')
       })
       .catch(err => {
-
+        let errors = []
+        for(let i = 0; i < err.errors.length; i++){
+          errors.push(err.errors[i].message)
+        }
+        res.send(errors)
       })
   }
 

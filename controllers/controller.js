@@ -30,13 +30,17 @@ class Controller{
         res.render('voucher/voucher.ejs', {data, convertToRupiah})
       })
       .catch(err => {
+
+
         res.send(err)
       })
   }
 
   static postLogin(req,res){ //Post login
-    const {username, password} = req.body
-    User.findOne({where: {username: username}})
+    const {password} = req.body
+    let username = req.body.username == '' ? null : req.body.username
+
+    User.findOne({where: {username}})
       .then(data => {
         if(compare(password, data.password)){
           req.session.user = {
@@ -60,7 +64,12 @@ class Controller{
     // res.redirect('/users')
     const {name,phone_number,username,password,email} = req.body
     const user = {
-      name, phone_number,username,password,email,saldo: 0
+      name: name == '' ? null : name, 
+      phone_number: phone_number == '' ? null : phone_number,
+      username: username == '' ? null : username,
+      password: password == '' ? null :password,
+      email: email == '' ? null : email,
+      saldo: 0
     }
 
     User.create(user)
@@ -75,8 +84,11 @@ class Controller{
         res.redirect('/users')
       })
       .catch(err => {
-        console.log(err);
-        res.send(err)
+        let errors = []
+        for(let i = 0; i < err.errors.length; i++){
+          errors.push(err.errors[i].message)
+        }
+        res.send(errors)
       })
   }
 
