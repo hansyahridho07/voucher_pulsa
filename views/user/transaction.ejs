@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction</title>
+</head>
+<body>
+  <h1>List Voucher</h1>
+  <form action="" method="post">
+    <p>Voucher: </p>
+    <select name="VoucherId" id="">
+      <option value="">---Select---</option>
+      <% data.forEach(el => { %>
+        <option value="<%= el.id %>"><%= el.name_voucher %></option>
+        <% }) %>
+    </select>
+    <p>Jumlah</p>
+    <input type="number" name="qty" style="width: 85px;" placeholder="e.g: 1"><br><br>
+    <button type="submit">Beli</button>
+    <a href="/users">Back</a>
+  </form>
+  
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Data</title>
+</head>
+<body>
+  <h1>Edit Data</h1>
+  <form action="" method="post">
+    <p>Full Name</p>
+    <input type="text" name="name" value="<%= data.name %>">
+    <p>Nomber Phone</p>
+    <input type="number" name="phone_number" value="<%= data.phone_number %>">
+    <p>Email</p>
+    <input type="text" name="email" value="<%= data.email %>">
+    <p>Username</p>
+    <input type="text" name="username" value="<%= data.username %>"><br><br>
+    <button type="submit">Edit</button>
+    <a href="/users">Back</a><br>
+  </form>
+
+</body>
+</html>

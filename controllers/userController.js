@@ -1,9 +1,91 @@
 const convertToRupiah = require('../helpers/convertRupiah')
-const {User, Voucher} = require('../models/index')
+const email = require('../helpers/server')
+const {User, Voucher, Transaction} = require('../models/index')
 
 class UserController{
   static showUser(req,res){
-    res.render('user/home.ejs', {data: req.session.user, convertToRupiah})
+    const id = req.session.user.id
+    User.findByPk(id, {include:Voucher})
+      .then(data => {
+        // res.send(data)
+        res.render('user/home.ejs', {user: req.session.user, convertToRupiah, data})
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static getTransaction(req,res){
+    let user
+    User.findByPk(req.params.id)
+      .then(data => {
+        user = data
+        return Voucher.findAll()
+      })
+      .then(data => {
+        res.render('user/transaction', {data, session:req.session.user, user})
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static getEdit(req,res){
+    User.findByPk(req.params.id)
+      .then(data => {
+        res.render('user/edituser.ejs', {data})
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static postEdit(req,res){
+    const {name, phone_number, email, username} = req.body
+    const query = {name, phone_number, email, username}
+    User.update(query, {where: {id: req.params.id}})
+      .then(data => {
+        res.redirect('/users')
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static postTransaction(req,res){
+    const {VoucherId, qty} = req.body
+    const id = req.params.id
+    const query = {VoucherId, UserId: id, qty}
+    let harga = 0
+    Transaction.create(query)
+      .then(data => {
+        return Voucher.findByPk(VoucherId)
+      })
+      .then(data => {
+        harga = data.price
+        return User.findByPk(id)
+      })
+      .then(data => {
+        data.saldo += harga * qty
+        return User.update({saldo: data.saldo}, {where:{id}})
+      })
+      .then(data => {
+        return User.findByPk(id)
+        
+      })
+      .then(data => {
+        let obj ={
+          nama: data.name,
+          saldo: (harga * qty),
+          email: data.email,
+          phone: data.phone_number
+        }
+        email(obj)
+        res.redirect('/users')
+      })
+      .catch(err => {
+
+      })
   }
 }
 

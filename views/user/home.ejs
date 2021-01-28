@@ -8,21 +8,22 @@
 <body>
   <h1 style="text-align: center;">e-Konter Helsinki-08</h1>
   <%- include('../navbar/navbar.ejs') %>
-  <%= JSON.stringify(data) %>
   <h3>Selamat datang, <%= data.name %></h3>
   <h4>Saldo: <%= convertToRupiah(data.saldo) %></h4>
   <h4>Nomer Hp: <%= data.phone_number %></h4>
-  <a href="transaction.html">Beli Voucher</a>
-  <a href="editdata.html">Edit Data</a>
+  <a href="/users/transaction/<%= data.id %>">Beli Voucher</a>
+  <a href="/users/edit/<%= data.id %>">Edit Data</a>
   <table border="1px">
     <tr>
       <th>Voucher</th>
       <th>Jumlah</th>
     </tr>
+    <% for(let i = 0; i < data.Vouchers.length; i++){ %>
     <tr>
-      <td>Rp. 100.000 <- (helper)</td>
-      <td style="text-align: center;">2</td>
+      <td><%= data.Vouchers[i].name_voucher %></td>
+      <td><%= data.Vouchers[i].Transaction.qty %></td>
     </tr>
+    <% } %>
   </table>
 </body>
 </html>
